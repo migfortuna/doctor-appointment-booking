@@ -7,7 +7,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [token, setToken] = useState(true); // is user logged in or not
   return (
-    <nav className="flex items-center justify-between py-4 mb-5 border-b border-b-gray-400 text-sm">
+    <nav className="sm:mx-[10%] flex items-center justify-between py-4 mb-5 border-b border-b-gray-400 text-sm">
       <Link to="/">
         <img
           src={assets.logo}
@@ -46,7 +46,7 @@ const Navbar = () => {
             alt="navbar-dropdown-icon"
           />
           <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
-            <div className="min-w-44 flex flex-col bg-stone-100 rounded-sm p-1">
+            <div className="min-w-44 flex flex-col bg-stone-100 rounded-md p-1">
               <Link to="/profile" className="p-2 hover:bg-stone-200 rounded-md">
                 My Profile
               </Link>

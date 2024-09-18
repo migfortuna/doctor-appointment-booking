@@ -5,7 +5,7 @@ import { assets } from "../../assets/assets";
 const Header = () => {
   return (
     <section
-      className="flex flex-col flex-wrap md:flex-row bg-primary 
+      className="sm:mx-[10%] flex flex-col flex-wrap md:flex-row bg-primary 
       rounded-lg px-6 md:px-10 lg:px-20"
     >
       {/* LEFT */}
@@ -34,8 +34,8 @@ const Header = () => {
           </p>
         </div>
 
-        <Link
-          to="/"
+        <a
+          href="#speciality"
           className="capitalize flex items-center gap-2 bg-white px-8 py-3 rounded-full 
           text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
         >
@@ -45,7 +45,7 @@ const Header = () => {
             src={assets.arrow_icon}
             alt="home-header-book-appointment"
           />
-        </Link>
+        </a>
       </div>
 
       {/* RIGHT */}
