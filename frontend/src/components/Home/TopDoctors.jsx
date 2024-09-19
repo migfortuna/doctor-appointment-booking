@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { doctors } from "../../assets/assets";
+import { AppContext } from "../../context";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
+
+  // CONTEXT CONSUMER
+  // consumes the data from the provider context
+  const { doctors } = useContext(AppContext);
   return (
     <section className="sm:mx-[10%] flex flex-col items-center gap-4 my-16 text-gray-900">
       <h1 className="capitalize text-3xl font-medium">top doctors to book</h1>
