@@ -1,8 +1,9 @@
-import React from "react";
-import { specialityData } from "../../assets/assets";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../context";
 
 const SpecialityMenu = () => {
+  const { specialityData } = useContext(AppContext);
   return (
     <section
       id="speciality"

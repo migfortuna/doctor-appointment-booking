@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+     font-family: "Outfit", sans-serif;
+     font-optical-sizing: auto;
+     font-weight: 300;
+     font-style: normal;
+}
+
 .active hr {
      display: block;
 }

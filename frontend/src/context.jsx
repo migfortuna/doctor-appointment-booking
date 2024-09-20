@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { doctors } from "./assets/assets.js";
+import { doctors, specialityData } from "./assets/assets.js";
 
 // CREATING CONTEXT
 // allows you to pass data between components without using props
@@ -9,7 +9,7 @@ import { doctors } from "./assets/assets.js";
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-  const value = { doctors };
+  const value = { doctors, specialityData };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

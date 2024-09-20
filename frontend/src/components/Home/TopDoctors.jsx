@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
+import DoctorCard from "../DoctorCard";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
@@ -16,22 +17,7 @@ const TopDoctors = () => {
       </p>
       <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
         {doctors.slice(0, 10).map((doc) => (
-          <div
-            key={doc._id}
-            className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer
-            hover:translate-y-[-10px] transition-all duration-500"
-            onClick={() => navigate(`/appointment/${doc._id}`)}
-          >
-            <img src={doc.image} alt={doc.name} className="bg-blue-50" />
-            <div className="p-4">
-              <div className="flex items-center gap-1 text-sm text-center text-green-500">
-                <p className="w-2 h-2 bg-green-500 rounded-full"></p>
-                <p className="capitalize">available</p>
-              </div>
-              <h2 className="text-gray-900 text-lg font-medium">{doc.name}</h2>
-              <p className="text-gray-600 text-sm">{doc.speciality}</p>
-            </div>
-          </div>
+          <DoctorCard key={doc._id} doc={{ ...doc }} />
         ))}
       </div>
       <button
