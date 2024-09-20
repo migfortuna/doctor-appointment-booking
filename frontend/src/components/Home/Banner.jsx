@@ -6,7 +6,7 @@ const Banner = () => {
   const navigate = useNavigate();
   return (
     <section
-      className="sm:mx-[10%] flex bg-primary rounded-lg
+      className="flex bg-primary rounded-lg
       px-6 sm:px-10 md:px-12 lg:px-14 my-20 md:mx-10"
     >
       {/* LEFT SIDE */}
