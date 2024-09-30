@@ -8,7 +8,10 @@ const DoctorCard = ({ doc }) => {
       key={doc._id}
       className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer
             hover:translate-y-[-10px] transition-all duration-500"
-      onClick={() => navigate(`/appointment/${doc._id}`)}
+      onClick={() => {
+        navigate(`/appointment/${doc._id}`);
+        scrollTo(0, 0);
+      }}
     >
       <img src={doc.image} alt={doc.name} className="bg-blue-50" />
       <div className="p-4">

@@ -1,13 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../context";
 import { assets } from "../../assets/assets";
 
-const Doctor = () => {
-  const { doctorId } = useParams();
-  const { doctors } = useContext(AppContext);
-  const docInfo = doctors.find((doc) => doc._id == doctorId);
-
+const Doctor = ({ docInfo }) => {
   return (
     <div className="flex flex-col gap-4 md:flex-row">
       {/* DOC IMAGE */}
