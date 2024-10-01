@@ -12,6 +12,7 @@ import Doctors from "./pages/Doctors";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import MyAppointments from "./pages/MyAppointments";
 import Appointment from "./pages/Appointment";
 import Profile from "./pages/Profile";
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/appointments" element={<MyAppointments />} />
       <Route path="/appointment/:doctorId" element={<Appointment />} />
       <Route path="/profile" element={<Profile />} />
