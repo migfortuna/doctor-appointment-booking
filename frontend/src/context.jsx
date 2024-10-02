@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { doctors, specialityData } from "./assets/assets.js";
 
 // CREATING CONTEXT
@@ -9,7 +9,8 @@ import { doctors, specialityData } from "./assets/assets.js";
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-  const value = { doctors, specialityData };
+  const [currentUser, setCurrentUser] = useState(null);
+  const value = { doctors, specialityData, currentUser, setCurrentUser };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

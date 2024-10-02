@@ -18,18 +18,23 @@ const SignUp = () => {
   };
 
   return (
-    <section className="flex flex-col items-center">
-      <div className="max-w-[360px] p-10 border border-gray-300 rounded-lg shadow-lg">
-        <h1>Sign Up</h1>
+    <section className="min-h-[80vh] flex flex-col items-center">
+      <div
+        className="flex flex-col gap-3 items-start 
+        m-auto p-8 sm:min-w-96 border rounded-xl
+        text-zinc-600 text-sm shadow-lg"
+      >
+        <h1 className="text-2xl font-semibold">Sign Up</h1>
         <p>Please sign up to book an appointment</p>
 
-        <form action="" onSubmit={(e) => onSubmitHandler(e)}>
+        <form action="" onSubmit={(e) => onSubmitHandler(e)} className="w-full">
           <p>First Name</p>
           <input
             type="text"
             name="firstName"
             id="firstName"
-            className="w-full border border-gray-200 rounded-md py-1"
+            required
+            className="w-full border border-zinc-300 rounded p-2 mt-1 mb-3"
             onChange={(e) =>
               setUserData({ ...userData, firstName: e.target.value })
             }
@@ -40,7 +45,7 @@ const SignUp = () => {
             type="text"
             name="middleName"
             id="middleName"
-            className="w-full border border-gray-200 rounded-md py-1"
+            className="w-full border border-zinc-300 rounded p-2 mt-1 mb-3"
             onChange={(e) =>
               setUserData({ ...userData, middleName: e.target.value })
             }
@@ -51,7 +56,8 @@ const SignUp = () => {
             type="text"
             name="lastName"
             id="lastName"
-            className="w-full border border-gray-200 rounded-md py-1"
+            required
+            className="w-full border border-zinc-300 rounded p-2 mt-1 mb-3"
             onChange={(e) =>
               setUserData({ ...userData, lastName: e.target.value })
             }
@@ -62,7 +68,8 @@ const SignUp = () => {
             type="email"
             name="email"
             id="email"
-            className="w-full border border-gray-200 rounded-md py-1"
+            required
+            className="w-full border border-zinc-300 rounded p-2 mt-1 mb-3"
             onChange={(e) =>
               setUserData({ ...userData, email: e.target.value })
             }
@@ -73,7 +80,8 @@ const SignUp = () => {
             type="password"
             name="password"
             id="password"
-            className="w-full border border-gray-200 rounded-md py-1"
+            required
+            className="w-full border border-zinc-300 rounded p-2 mt-1 mb-4"
             onChange={(e) =>
               setUserData({ ...userData, password: e.target.value })
             }
@@ -81,7 +89,7 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="w-full bg-primary rounded-md text-white py-1"
+            className="w-full bg-primary rounded-md text-white py-2 mb-2 text-base"
           >
             Sign Up
           </button>
@@ -91,7 +99,10 @@ const SignUp = () => {
           Already have an account?{" "}
           <span
             className="text-primary underline cursor-pointer"
-            onClick={() => navigate("/login")}
+            onClick={() => {
+              navigate("/login");
+              scrollTo(0, 0);
+            }}
           >
             Login here
           </span>

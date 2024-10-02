@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../context";
 
 const Profile = () => {
-  return <div>Profile</div>;
+  const { currentUser } = useContext(AppContext);
+  return <div>Hi {currentUser.firstName}!</div>;
 };
 
 export default Profile;

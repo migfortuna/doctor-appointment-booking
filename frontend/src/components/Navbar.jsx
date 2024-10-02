@@ -1,11 +1,16 @@
-import React, { useState } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { AppContext } from "../context";
 import { assets } from "../assets/assets";
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true); // is user logged in or not
+  const { currentUser, setCurrentUser } = useContext(AppContext);
+
+  const logout = () => {
+    setCurrentUser(null);
+  };
+
   return (
     <nav className="sm:mx-[10%] flex items-center justify-between py-4 mb-5 border-b border-b-gray-400 text-sm">
       <Link to="/">
@@ -33,7 +38,7 @@ const Navbar = () => {
           <hr className="border-none outline-none h-0.5 bg-primary w-4/5 m-auto hidden" />
         </NavLink>
       </ul>
-      {token ? (
+      {!!currentUser ? (
         <div className="flex items-center gap-2 cursor-pointer group relative">
           <img
             className="w-8 rounded-full"
@@ -59,7 +64,7 @@ const Navbar = () => {
               <Link
                 to="/"
                 className="p-2 hover:bg-stone-200 rounded-md"
-                onClick={() => setToken(false)}
+                onClick={() => logout()}
               >
                 Logout
               </Link>
@@ -68,7 +73,7 @@ const Navbar = () => {
         </div>
       ) : (
         <Link
-          to="/login"
+          to="/signup"
           className="bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block"
         >
           Create Account
