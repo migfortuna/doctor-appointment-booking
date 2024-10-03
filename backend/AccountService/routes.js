@@ -1,11 +1,16 @@
 import { Router } from "express";
-import { checkBody } from "./middleware.js";
-import { getUser } from "./handlers.js";
+import { getAccountSchema, newAccountSchema } from "./schema.js";
+import { validateSchema, checkDuplicateEmail } from "./middleware.js";
+import { getUser, addAccount } from "./handlers.js";
 
 const router = Router();
 
-router.use(checkBody);
-
-router.post("/", getUser);
+router.post("/", validateSchema(getAccountSchema), getUser);
+router.post(
+  "/new",
+  validateSchema(newAccountSchema),
+  checkDuplicateEmail,
+  addAccount
+);
 
 export default router;

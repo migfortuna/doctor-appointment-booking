@@ -14,7 +14,8 @@ export const errorHandler = (err, req, res, next) => {
   const errorMapper = {
     400: "Invalid Request",
     404: "Resource Not Found",
+    409: "Record already exists",
     500: err.message ?? "Internal Server Error",
   };
-  res.status(status).send({ error: errorMapper[status] });
+  res.status(status).send({ error: err.message || errorMapper[status] });
 };
