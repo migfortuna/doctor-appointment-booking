@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context";
 
 const SignUp = () => {
   const navigate = useNavigate();
-
   const [userData, setUserData] = useState({
     firstName: "",
     middleName: "",
@@ -11,10 +11,26 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [errorMsg, setErrorMsg] = useState();
+  const { setCurrentUser } = useContext(AppContext);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("SIGN UP USER DATA", userData);
+    const res = await fetch("http://localhost:8000/api/account/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:5173",
+      },
+      body: JSON.stringify(userData),
+    });
+    const { error, data } = await res.json();
+    if (data) {
+      // setCurrentUser({ ...data });
+      navigate("/login");
+    } else {
+      setErrorMsg(error);
+    }
   };
 
   return (
@@ -86,6 +102,10 @@ const SignUp = () => {
               setUserData({ ...userData, password: e.target.value })
             }
           />
+
+          {!!errorMsg && (
+            <p className="mb-3 text-red-600 font-bold">{errorMsg}</p>
+          )}
 
           <button
             type="submit"
