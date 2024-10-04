@@ -41,10 +41,13 @@ export const addAccount = async (req, res, next) => {
 export const updateAccount = async (req, res, next) => {
   try {
     const index = accounts.indexOf(req.currentUser);
-    accounts[index] = {
+    const updatedData = {
       ...accounts[index],
       ...req.body,
+      email: req.body.newEmail,
     };
+    delete updatedData["newEmail"];
+    accounts[index] = updatedData;
     res.send({ data: { ...accounts[index] } });
   } catch (err) {
     return next(new Error(err));

@@ -32,7 +32,10 @@ export const newAccountSchema = yup.object({
 
 export const updateAccountSchema = yup.object({
   body: yup.object({
+    firstName: yup.string().trim().required(),
+    lastName: yup.string().trim().required(),
     email: yup.string().email().trim().required(),
+    newEmail: yup.string().email().trim().required(),
     phone: yup
       .string()
       .trim()
