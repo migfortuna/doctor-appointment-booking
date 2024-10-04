@@ -73,10 +73,10 @@ const Navbar = () => {
         </div>
       ) : (
         <Link
-          to="/signup"
-          className="bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block"
+          to="/login"
+          className="bg-primary text-white px-8 py-2 rounded-full font-light hidden md:block"
         >
-          Create Account
+          Login
         </Link>
       )}
     </nav>

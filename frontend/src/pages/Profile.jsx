@@ -3,18 +3,20 @@ import {
   MdOutlineEmail,
   MdOutlinePhoneIphone,
   MdOutlinePinDrop,
+  MdOutlineErrorOutline,
 } from "react-icons/md";
 import { AppContext } from "../context";
 import { assets } from "../assets/assets.js";
-import EditButton from "../components/Profile/EditButton.jsx";
+import FullName from "../components/Profile/FullName.jsx";
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(AppContext);
   const [isEditable, setIsEditable] = useState(false);
   const [userData, setUserData] = useState({
     email: currentUser?.email,
-    // firstName: currentUser?.firstName,
-    // lastName: currentUser?.lastName,
+    newEmail: currentUser?.email,
+    firstName: currentUser?.firstName,
+    lastName: currentUser?.lastName,
     phone: currentUser?.phone,
     address: currentUser?.address,
     gender: currentUser?.gender,
@@ -22,9 +24,9 @@ const Profile = () => {
     birthDay: currentUser?.birthDay,
     birthYear: currentUser?.birthYear,
   });
+  const [errorResponse, setErrorResponse] = useState();
 
   const updateProfile = async (event) => {
-    setIsEditable(false);
     event.preventDefault();
     const res = await fetch("http://localhost:8000/api/account", {
       method: "PATCH",
@@ -36,13 +38,16 @@ const Profile = () => {
     });
     const { error, data } = await res.json();
     if (error) {
-      console.log("ERROR", error);
+      setErrorResponse(error);
     } else {
+      setErrorResponse(null);
+      setIsEditable(false);
       setCurrentUser({ ...data });
       setUserData({
         email: data.email,
-        // firstName: data.firstName,
-        // lastName: data.lastName,
+        newEmail: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
         phone: data.phone,
         address: data.address,
         gender: data.gender,
@@ -67,11 +72,12 @@ const Profile = () => {
           alt="profile-pic"
           className="rounded-md m-auto"
         />
-        <div className="w-full flex flex-row justify-between items-center">
-          <h1 className="text-xl md:text-2xl font-medium">
-            {userData.firstName} {userData.lastName}
-          </h1>
-          <EditButton isEditable={isEditable} setIsEditable={setIsEditable} />
+        <div className="w-full flex flex-wrap justify-between items-center gap-3">
+          <FullName
+            isEditable={isEditable}
+            userData={userData}
+            setUserData={setUserData}
+          />
         </div>
 
         <div className="w-full border-[0.05px] border-gray-300"></div>
@@ -84,17 +90,14 @@ const Profile = () => {
               type="text"
               id="email"
               name="email"
-              disabled
-              value={userData.email}
-              className="bg-white text-end"
-              // defaultValue={userData.email}
-              // disabled={!isEditable}
-              // className={`bg-white text-end ${
-              //   isEditable && "border border-gray-300 rounded-md px-2"
-              // }`}
-              // onChange={(e) =>
-              //   setUserData({ ...userData, email: e.target.value })
-              // }
+              defaultValue={userData.email}
+              disabled={!isEditable}
+              className={`bg-white text-end ${
+                isEditable && "border border-gray-300 rounded-md px-2"
+              }`}
+              onChange={(e) =>
+                setUserData({ ...userData, newEmail: e.target.value })
+              }
             />
           </div>
           <div className="flex justify-between items-center">
@@ -157,14 +160,29 @@ const Profile = () => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className={`${
-            !isEditable && "hidden"
-          } border border-gray-300 mt-3 px-7 py-1 rounded-full ms-auto`}
-        >
-          Save
-        </button>
+        <div className="w-full flex items-center justify-between">
+          <button
+            type="button"
+            className="border border-gray-300 px-7 py-2 rounded-md"
+            onClick={() => setIsEditable(!isEditable)}
+          >
+            Edit
+          </button>
+          <div className="flex items-center justify-end gap-2">
+            <MdOutlineErrorOutline
+              size={30}
+              color="red"
+              className={`${!errorResponse && "hidden"}`}
+            />
+            <button
+              type="submit"
+              disabled
+              className="bg-primary text-white px-7 py-2 rounded-md"
+            >
+              Save
+            </button>
+          </div>
+        </div>
       </form>
     </section>
   );
