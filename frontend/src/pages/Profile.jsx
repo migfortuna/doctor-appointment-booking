@@ -176,7 +176,7 @@ const Profile = () => {
             />
             <button
               type="submit"
-              disabled
+              disabled={!isEditable}
               className="bg-primary text-white px-7 py-2 rounded-md"
             >
               Save
