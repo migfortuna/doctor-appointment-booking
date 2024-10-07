@@ -138,19 +138,21 @@ const Profile = () => {
           <p className="uppercase underline">basic information</p>
           <div className="flex justify-between items-center">
             <p>Gender:</p>
-            <input
-              type="text"
-              id="gender"
-              name="gender"
-              defaultValue={userData.gender}
-              disabled={!isEditable}
-              className={`bg-white text-end ${
-                isEditable && "border border-gray-300 rounded-md px-2"
-              }`}
-              onChange={(e) =>
-                setUserData({ ...userData, gender: e.target.value })
-              }
-            />
+            {isEditable ? (
+              <select
+                defaultValue={userData.gender}
+                className="border border-gray-300 rounded-md py-1 px-1"
+                onChange={(e) =>
+                  setUserData({ ...userData, gender: e.target.value })
+                }
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            ) : (
+              <p>{userData.gender}</p>
+            )}
           </div>
           <div className="flex justify-between items-center">
             <p>Birthday:</p>
