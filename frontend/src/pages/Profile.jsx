@@ -26,8 +26,7 @@ const Profile = () => {
   });
   const [errorResponse, setErrorResponse] = useState();
 
-  const updateProfile = async (event) => {
-    event.preventDefault();
+  const updateProfile = async () => {
     const res = await fetch("http://localhost:8000/api/account", {
       method: "PATCH",
       headers: {
@@ -60,12 +59,10 @@ const Profile = () => {
 
   return (
     <section className="min-h-[80vh] flex flex-col items-center">
-      <form
-        action=""
+      <div
         className="flex flex-col items-start gap-4 
         m-auto p-8 sm:min-w-96 border rounded-xl
         text-zinc-600 text-sm shadow-lg"
-        onSubmit={(e) => updateProfile(e)}
       >
         <img
           src={assets.profile_pic}
@@ -162,30 +159,31 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="w-full flex items-center justify-between">
-          <button
-            type="button"
-            className="border border-gray-300 px-7 py-2 rounded-md"
-            onClick={() => setIsEditable(!isEditable)}
-          >
-            Edit
-          </button>
-          <div className="flex items-center justify-end gap-2">
-            <MdOutlineErrorOutline
-              size={30}
-              color="red"
-              className={`${!errorResponse && "hidden"}`}
-            />
+        <div className="w-full flex items-center justify-end">
+          <MdOutlineErrorOutline
+            size={30}
+            color="red"
+            className={`${!errorResponse && "hidden"}`}
+          />
+          {isEditable ? (
             <button
-              type="submit"
-              disabled={!isEditable}
-              className="bg-primary text-white px-7 py-2 rounded-md"
+              className="bg-white border border-gray-300 px-7 py-2 rounded-md
+              hover:bg-primary hover:border-primary hover:text-white transition-all duration-300"
+              onClick={() => updateProfile()}
             >
               Save
             </button>
-          </div>
+          ) : (
+            <button
+              className="bg-white border border-gray-300 px-7 py-2 rounded-md
+              hover:bg-primary hover:border-primary hover:text-white transition-all duration-300"
+              onClick={() => setIsEditable(true)}
+            >
+              Edit
+            </button>
+          )}
         </div>
-      </form>
+      </div>
     </section>
   );
 };
